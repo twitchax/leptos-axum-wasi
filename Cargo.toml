@@ -2,7 +2,7 @@
 name = "leptos-axum-wasi"
 version = "0.1.0"
 edition = "2021"
-authors = ["Aaron Roney"]
+authors = ["Aaron Roney <twitchax@gmail.com>"]
 description = "Example project showing off Leptos with Axum, running as a `wasi:http` service."
 
 [lib]
@@ -14,10 +14,11 @@ leptos_router = { version = "0.7.0", features = ["nightly"] }
 # Scoped down due to https://github.com/rust-lang/rust/issues/130323.
 axum = { version = "0.7", default-features = false, features = ["json", "matched-path", "original-uri", "tower-log", "tracing", "form", "query"], optional = true }
 console_error_panic_hook = { version = "0.1", optional = true}
-leptos_axum = { version = "0.7.0", optional = true }
+# Tell leptos_axum to use a wasm-friendly executor.
+leptos_axum = { version = "0.7.0", default-features = false, features = ["wasm"], optional = true }
 leptos_meta = { version = "0.7.0" }
-# Scoped down due to https://github.com/rust-lang/rust/issues/130323.
-tokio = { version = "1", default-features = false, features = ["sync", "macros", "io-util", "rt", "time"], optional = true }
+# Scoped down to minimal set.
+tokio = { version = "1", default-features = false, features = ["sync", "rt", "time"], optional = true }
 wasm-bindgen = { version = "=0.2.100", optional = true }
 wasi = { version = "0.14.0+wasi-0.2.3", optional = true }
 tower = { version = "0.5.2", optional = true }
