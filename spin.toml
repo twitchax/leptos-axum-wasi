@@ -1,0 +1,19 @@
+spin_manifest_version = 2
+
+[application]
+name = "leptos-axum-wasi"
+version = "0.1.0"
+authors = ["Aaron Roney"]
+description = "Example project showing off Leptos with Axum, running as a `wasi:http` service."
+
+[[trigger.http]]
+route = "/..."
+component = "leptos-axum-wasi"
+
+[component.leptos-axum-wasi]
+source = "target/wasm32-wasip2/release/leptos_axum_wasi.wasm"
+allowed_outbound_hosts = []
+
+[component.leptos-axum-wasi.build]
+command = "cargo leptos build --release && LEPTOS_OUTPUT_NAME=leptos_axum_wasi cargo build --lib --target wasm32-wasip2 --release --no-default-features --features ssr"
+watch = ["src/**/*.rs", "Cargo.toml"]
