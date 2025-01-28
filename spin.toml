@@ -2,7 +2,7 @@ spin_manifest_version = 2
 
 [application]
 name = "leptos-axum-wasi"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Aaron Roney <twitchax@gmail.com>"]
 description = "Example project showing off Leptos with Axum, running as a `wasi:http` service."
 

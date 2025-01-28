@@ -8,9 +8,8 @@ use tower::ServiceExt;
 use wasi::{
     exports::http::incoming_handler::{Guest as IncomingHandlerGuest, IncomingRequest, ResponseOutparam},
     http::{
-        outgoing_handler::ErrorCode,
         proxy::export,
-        types::{Headers, OutgoingBody, OutgoingResponse},
+        types::{ErrorCode, Headers, OutgoingBody, OutgoingResponse},
     },
 };
 
@@ -23,7 +22,7 @@ struct LeptosServer;
 impl IncomingHandlerGuest for LeptosServer {
     fn handle(request: IncomingRequest, response_out: ResponseOutparam) {
         println!("Handling request: `{:?}` => `{:?}`.", request.method(), request.path_with_query());
-
+        
         match tokio::runtime::Builder::new_current_thread().enable_all().build() {
             Ok(rt) => {
                 rt.block_on(async move {
